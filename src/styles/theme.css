@@ -5,6 +5,7 @@
   --secondary: #6c3eb6;
   --tertiary: #1bc6d9;
   --third: #c72c7b;
+  --third-dark: #8b1b59;
   --accent: #4DB8C8;
   --bg: #101624;
   --text: #e6e6f0;
@@ -123,9 +124,9 @@ h2 {
 
 /* Buttons */
 button {
-  background: var(--secondary);
+  background: var(--third-dark);
   color: var(--text);
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid var(--third-dark);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -135,7 +136,7 @@ button {
 
 button:hover,
 button:focus {
-  background: var(--accent);
+  background: var(--third);
   box-shadow: 0 2px 8px #4DB8C833;
   outline: none;
 }
@@ -149,8 +150,8 @@ button:focus {
 .wave-buttons button {
   flex: 1;
   padding: 0.4rem 0.8rem;
-  border: 1.5px solid var(--accent);
-  background: var(--secondary);
+  border: 1.5px solid var(--third-dark);
+  background: var(--third-dark);
   color: var(--text);
   border-radius: 0.5rem;
   transition: background 0.2s, box-shadow 0.2s;

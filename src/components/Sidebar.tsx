@@ -10,7 +10,7 @@ const [waveform, setWaveform] = useState<string>("Sine");
 
   return (
     <aside className="sidebar sidebar--left">
-      <div style={{ color: "#b6e94e", fontWeight: "bold", marginBottom: "1rem" }}>
+      <div style={{ color: "var(--accent)", fontWeight: "bold", marginBottom: "1rem" }}>
         Subtractive Synth
       </div>
 
