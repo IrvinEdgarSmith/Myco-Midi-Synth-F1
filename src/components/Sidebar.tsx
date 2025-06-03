@@ -5,7 +5,8 @@ export default function Sidebar() {
   const [advSound, setAdvSound] = useState(false);
   const [advTimbre, setAdvTimbre] = useState(false);
   const [advSpectrum, setAdvSpectrum] = useState(false);
-  const [advUnison, setAdvUnison] = useState(false);
+const [advUnison, setAdvUnison] = useState(false);
+const [waveform, setWaveform] = useState<string>("Sine");
 
   return (
     <aside className="sidebar sidebar--left">
@@ -18,12 +19,12 @@ export default function Sidebar() {
         <h2>Sound Generation</h2>
         <div className="control">
           <label>Oscillator:</label>
-          <select>
-            <option>Sine</option>
-            <option>Square</option>
-            <option>Triangle</option>
-            <option>Sawtooth</option>
-          </select>
+          <div className="wave-buttons">
+            <button type="button" className={waveform === "Sine" ? "active" : ""} onClick={() => setWaveform("Sine")}>Sine</button>
+            <button type="button" className={waveform === "Triangle" ? "active" : ""} onClick={() => setWaveform("Triangle")}>Triangle</button>
+            <button type="button" className={waveform === "Sawtooth" ? "active" : ""} onClick={() => setWaveform("Sawtooth")}>Sawtooth</button>
+            <button type="button" className={waveform === "Square" ? "active" : ""} onClick={() => setWaveform("Square")}>Square</button>
+          </div>
         </div>
         <div className="control">
           <label>Coarse Tune:</label>
