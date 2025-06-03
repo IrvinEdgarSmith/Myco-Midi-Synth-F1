@@ -1,12 +1,14 @@
-// Sidebar.tsx
 import React, { useState } from "react";
 
 export default function Sidebar() {
   const [advSound, setAdvSound] = useState(false);
-  const [advTimbre, setAdvTimbre] = useState(false);
   const [advSpectrum, setAdvSpectrum] = useState(false);
-const [advUnison, setAdvUnison] = useState(false);
-const [waveform, setWaveform] = useState<string>("Sine");
+  const [advUnison, setAdvUnison] = useState(false);
+  const [waveform, setWaveform] = useState<string>("Sine");
+  const [basicFilters, setBasicFilters] = useState(true);
+  const [advancedFilters, setAdvancedFilters] = useState(false);
+  const [selectedBasicFilter, setSelectedBasicFilter] = useState<string>("Low-pass");
+  const [selectedAdvancedFilter, setSelectedAdvancedFilter] = useState<string>("Comb");
 
   return (
     <aside className="sidebar sidebar--left">
@@ -48,40 +50,109 @@ const [waveform, setWaveform] = useState<string>("Sine");
             </div>
           </div>
         )}
-      </section>
-
-      {/* Timbre Shaping */}
+      </section>      {/* Timbre Shaping */}
       <section className="container timbre-shaping">
         <h2>Timbre Shaping</h2>
-        <div className="control">
-          <label>Filter Type:</label>
-          <select>
-            <option>Low-pass</option>
-            <option>High-pass</option>
-            <option>Band-pass</option>
-            <option>Notch</option>
-          </select>
+        
+        {/* Basic Filters Toggle Bar */}
+        <div className="filter-toggle-bar">
+          <button 
+            className={`toggle-bar ${basicFilters ? 'active' : ''}`}
+            onClick={() => setBasicFilters(!basicFilters)}
+          >
+            <span className="toggle-icon">{basicFilters ? '▼' : '▶'}</span>
+            Basic Filters
+            <span className="filter-hint">Essential tone shaping</span>
+          </button>
         </div>
-        <div className="control">
-          <label>Cutoff:</label>
-          <input type="range" min="20" max="20000" />
+        
+        {basicFilters && (
+          <div className="filter-section basic-filters">
+            <div className="control">
+              <label>Filter Type:</label>
+              <select 
+                value={selectedBasicFilter} 
+                onChange={(e) => setSelectedBasicFilter(e.target.value)}
+              >
+                <option value="Low-pass">Low-pass (LP)</option>
+                <option value="High-pass">High-pass (HP)</option>
+                <option value="Band-pass">Band-pass (BP)</option>
+                <option value="Notch">Notch (Stop)</option>
+              </select>
+            </div>
+            <div className="control">
+              <label>Cutoff Frequency:</label>
+              <input type="range" min="20" max="20000" defaultValue="1000" />
+              <span className="value-display">1000 Hz</span>
+            </div>
+            <div className="control">
+              <label>Resonance (Q):</label>
+              <input type="range" min="0.1" max="30" step="0.1" defaultValue="1" />
+              <span className="value-display">1.0</span>
+            </div>
+            <div className="control">
+              <label>Drive/Saturation:</label>
+              <input type="range" min="0" max="100" defaultValue="0" />
+              <span className="value-display">0%</span>
+            </div>
+          </div>
+        )}
+
+        {/* Advanced Filters Toggle Bar */}
+        <div className="filter-toggle-bar">
+          <button 
+            className={`toggle-bar ${advancedFilters ? 'active' : ''}`}
+            onClick={() => setAdvancedFilters(!advancedFilters)}
+          >
+            <span className="toggle-icon">{advancedFilters ? '▼' : '▶'}</span>
+            Advanced Filters
+            <span className="filter-hint">Power user controls</span>
+          </button>
         </div>
-        <div className="control">
-          <label>Resonance:</label>
-          <input type="range" min="0" max="1" step="0.01" />
-        </div>
-        <button onClick={() => setAdvTimbre(!advTimbre)}>
-          {advTimbre ? "Hide Advanced" : "Show Advanced"}
-        </button>
-        {advTimbre && (
-          <div className="advanced">
+
+        {advancedFilters && (
+          <div className="filter-section advanced-filters">
+            <div className="control">
+              <label>Advanced Type:</label>
+              <select 
+                value={selectedAdvancedFilter} 
+                onChange={(e) => setSelectedAdvancedFilter(e.target.value)}
+              >
+                <option value="Comb">Comb Filter</option>
+                <option value="Formant">Formant Filter</option>
+                <option value="Ladder">Ladder (Moog-style)</option>
+                <option value="State Variable">State Variable</option>
+                <option value="Diode">Diode Ladder</option>
+                <option value="Multi-mode">Multi-mode</option>
+              </select>
+            </div>
+            <div className="control">
+              <label>Filter Poles:</label>
+              <select>
+                <option value="12">12 dB/oct (2-pole)</option>
+                <option value="24">24 dB/oct (4-pole)</option>
+                <option value="36">36 dB/oct (6-pole)</option>
+              </select>
+            </div>
             <div className="control">
               <label>Env Amount:</label>
-              <input type="range" min="0" max="1" step="0.01" />
+              <input type="range" min="-100" max="100" defaultValue="0" />
+              <span className="value-display">0%</span>
             </div>
             <div className="control">
               <label>Keyboard Tracking:</label>
-              <input type="checkbox" />
+              <input type="range" min="0" max="100" defaultValue="0" />
+              <span className="value-display">0%</span>
+            </div>
+            <div className="control">
+              <label>LFO Modulation:</label>
+              <input type="range" min="0" max="100" defaultValue="0" />
+              <span className="value-display">0%</span>
+            </div>
+            <div className="control">
+              <label>Filter Feedback:</label>
+              <input type="range" min="0" max="95" defaultValue="0" />
+              <span className="value-display">0%</span>
             </div>
           </div>
         )}
