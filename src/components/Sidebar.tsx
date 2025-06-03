@@ -16,9 +16,8 @@ const [waveform, setWaveform] = useState<string>("Sine");
 
       {/* Sound Generation */}
       <section className="container sound-generation">
-        <h2>Sound Generation</h2>
-        <div className="control">
-          <label>Oscillator:</label>
+        <h2>Sound Generation</h2>        <div className="control">
+          <label>Type:</label>
           <div className="wave-buttons">
             <button type="button" className={waveform === "Sine" ? "active" : ""} onClick={() => setWaveform("Sine")}>Sine</button>
             <button type="button" className={waveform === "Triangle" ? "active" : ""} onClick={() => setWaveform("Triangle")}>Triangle</button>
