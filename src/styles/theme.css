@@ -1,0 +1,141 @@
+/* theme.css - Synth App Dark Theme Palette and Layout */
+
+:root {
+  --primary: #142a4f;
+  --secondary: #6c3eb6;
+  --tertiary: #1bc6d9;
+  --third: #c72c7b;
+  --accent: #b6e94e;
+  --bg: #101624;
+  --text: #e6e6f0;
+  --border: #232a3a;
+  --container-bg: #181f33;
+  --gradient: linear-gradient(135deg, #142a4f 0%, #1bc6d9 100%);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-root {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: var(--gradient);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 27vw;
+  min-width: 260px;
+  max-width: 420px;
+  background: var(--container-bg);
+  border-right: 2px solid var(--border);
+  box-shadow: 2px 0 8px #0004;
+  padding: 0 0.5rem;
+  z-index: 2;
+}
+
+.sidebar--right {
+  border-right: none;
+  border-left: 2px solid var(--border);
+  box-shadow: -2px 0 8px #0004;
+}
+
+.workspace {
+  flex: 1 1 46vw;
+  min-width: 400px;
+  background: var(--container-bg);
+  padding: 1.5rem 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.container {
+  background: #1a2236cc;
+  border-radius: 1rem;
+  border: 1.5px solid var(--border);
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px #0002;
+  padding: 1.2rem 1rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.container:focus-within,
+.container:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px #b6e94e33;
+}
+
+h2 {
+  color: var(--accent);
+  font-size: 1.15rem;
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1200px) {
+  .sidebar,
+  .sidebar--right {
+    min-width: 180px;
+    max-width: 260px;
+  }
+  .workspace {
+    min-width: 200px;
+    padding: 1rem 1vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .app-root {
+    flex-direction: column;
+  }
+  .sidebar,
+  .sidebar--right {
+    width: 100vw;
+    min-width: unset;
+    max-width: unset;
+    flex-direction: row;
+    border-right: none;
+    border-left: none;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 2px 8px #0004;
+    padding: 0.5rem 0;
+  }
+  .sidebar--right {
+    border-bottom: none;
+    border-top: 2px solid var(--border);
+    box-shadow: 0 -2px 8px #0004;
+  }
+  .workspace {
+    min-width: unset;
+    padding: 1rem 2vw;
+  }
+}
+
+/* Buttons */
+button {
+  background: var(--secondary);
+  color: var(--text);
+  border: 1.5px solid var(--accent);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+button:hover,
+button:focus {
+  background: var(--accent);
+  box-shadow: 0 2px 8px #b6e94e33;
+  outline: none;
+}
